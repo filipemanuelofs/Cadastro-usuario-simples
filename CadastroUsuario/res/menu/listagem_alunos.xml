@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:icon="@drawable/ic_menu"
+        android:showAsAction="always"
+        android:title="Opções">
+        <menu>
+            <item
+                android:id="@+id/novo"
+                android:icon="@drawable/ic_novo"
+                android:showAsAction="always"
+                android:title="Novo"/>
+            <item
+                android:id="@+id/mapa"
+                android:icon="@drawable/ic_mapa"
+                android:showAsAction="always"
+                android:title="Mapa"/>
+        </menu>
+    </item>
+
+</menu>
