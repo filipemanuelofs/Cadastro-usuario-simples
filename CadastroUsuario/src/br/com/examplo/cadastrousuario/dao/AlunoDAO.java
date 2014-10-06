@@ -12,6 +12,7 @@ import br.com.examplo.cadastrousuario.model.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
 
+	private static final String CLAUSE_ID = "_id=?";
 	private static final String DATABASE = "cadastro.db";
 	private static final int VERSION = 1;
 
@@ -27,19 +28,6 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
 	public AlunoDAO(Context context) {
 		super(context, DATABASE, null, VERSION);
-	}
-
-	public void salvar(Aluno aluno) {
-		ContentValues values = new ContentValues();
-
-		values.put(COL_NOME, aluno.getNome());
-		values.put(COL_SITE, aluno.getSite());
-		values.put(COL_ENDERECO, aluno.getEndereco());
-		values.put(COL_TELEFONE, aluno.getTelefone());
-		values.put(COL_NOTA, aluno.getNota());
-		values.put(COL_FOTO, aluno.getFoto());
-
-		getWritableDatabase().insert(TABELA, null, values);
 	}
 
 	@Override
@@ -82,5 +70,37 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
 		}
 		return alunos;
+	}
+
+	public void salvar(Aluno aluno) {
+		ContentValues values = new ContentValues();
+
+		values.put(COL_NOME, aluno.getNome());
+		values.put(COL_SITE, aluno.getSite());
+		values.put(COL_ENDERECO, aluno.getEndereco());
+		values.put(COL_TELEFONE, aluno.getTelefone());
+		values.put(COL_NOTA, aluno.getNota());
+		values.put(COL_FOTO, aluno.getFoto());
+
+		getWritableDatabase().insert(TABELA, null, values);
+	}
+	
+	public void deletar(Aluno aluno) {
+		String[] args = {aluno.getId().toString()};
+		getWritableDatabase().delete(TABELA, CLAUSE_ID, args);
+	}
+
+	public void alterar(Aluno aluno) {
+		ContentValues values = new ContentValues();
+
+		values.put(COL_NOME, aluno.getNome());
+		values.put(COL_SITE, aluno.getSite());
+		values.put(COL_ENDERECO, aluno.getEndereco());
+		values.put(COL_TELEFONE, aluno.getTelefone());
+		values.put(COL_NOTA, aluno.getNota());
+		values.put(COL_FOTO, aluno.getFoto());
+		
+		String[] args = {aluno.getId().toString()};
+		getWritableDatabase().update(TABELA, values, CLAUSE_ID, args);
 	}
 }
